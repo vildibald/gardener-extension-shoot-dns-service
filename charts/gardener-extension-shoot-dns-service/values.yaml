@@ -19,9 +19,6 @@ gardener:
   seed:
     identity: ""
 
-leaderElection:
-  resourceLock: leases
-
 # settings for metrics, e.g. scraping by seed-prometheus
 metrics:
   enableScraping: true

@@ -17,12 +17,10 @@ package app
 import (
 	"os"
 
-	controllercmd "github.com/gardener/gardener/extensions/pkg/controller/cmd"
-	heartbeatcmd "github.com/gardener/gardener/extensions/pkg/controller/heartbeat/cmd"
-	"k8s.io/client-go/tools/leaderelection/resourcelock"
-
 	dnsservicecmd "github.com/gardener/gardener-extension-shoot-dns-service/pkg/cmd"
 	"github.com/gardener/gardener-extension-shoot-dns-service/pkg/service"
+	controllercmd "github.com/gardener/gardener/extensions/pkg/controller/cmd"
+	heartbeatcmd "github.com/gardener/gardener/extensions/pkg/controller/heartbeat/cmd"
 )
 
 // ExtensionName is the name of the extension.
@@ -53,10 +51,9 @@ func NewOptions() *Options {
 		restOptions:    &controllercmd.RESTOptions{},
 		managerOptions: &controllercmd.ManagerOptions{
 			// These are default values.
-			LeaderElection:             true,
-			LeaderElectionID:           controllercmd.LeaderElectionNameID(ExtensionName),
-			LeaderElectionResourceLock: resourcelock.LeasesResourceLock,
-			LeaderElectionNamespace:    os.Getenv("LEADER_ELECTION_NAMESPACE"),
+			LeaderElection:          true,
+			LeaderElectionID:        controllercmd.LeaderElectionNameID(ExtensionName),
+			LeaderElectionNamespace: os.Getenv("LEADER_ELECTION_NAMESPACE"),
 		},
 		lifecycleControllerOptions: &controllercmd.ControllerOptions{
 			// This is a default value.
