@@ -5,7 +5,7 @@ go 1.20
 require (
 	github.com/ahmetb/gen-crd-api-reference-docs v0.3.0
 	github.com/gardener/external-dns-management v0.14.2
-	github.com/gardener/gardener v1.76.2
+	github.com/gardener/gardener v1.76.4
 	github.com/go-logr/logr v1.2.4
 	github.com/golang/mock v1.6.0
 	github.com/hashicorp/go-multierror v1.1.1
@@ -142,3 +142,5 @@ require (
 )
 
 replace k8s.io/client-go => k8s.io/client-go v0.26.3
+
+replace github.com/gardener/gardener => gitlab.devops.telekom.de/cas-devs/osc/gardener/upstream/gardener v1.76.4-0.20240611100646-0a9098b4f575
