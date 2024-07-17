@@ -756,7 +756,8 @@ func (a *actuator) createOrUpdateShootResources(ctx context.Context, dnsconfig *
 		objs = append(objs, crd3)
 	}
 
-	if err = managedresources.CreateFromUnstructured(ctx, a.Client(), namespace, KeptShootResourcesName, false, "", objs, true, nil); err != nil {
+	injectedLabels := map[string]string{v1beta1constants.ShootNoCleanup: "true"}
+	if err = managedresources.CreateFromUnstructured(ctx, a.Client(), namespace, KeptShootResourcesName, false, "", objs, true, injectedLabels); err != nil {
 		return fmt.Errorf("could not create managed resource %s: %w", KeptShootResourcesName, err)
 	}
 
@@ -772,7 +773,6 @@ func (a *actuator) createOrUpdateShootResources(ctx context.Context, dnsconfig *
 		},
 		"shootAccessServiceAccountName": service.ShootAccessServiceAccountName,
 	}
-	injectedLabels := map[string]string{v1beta1constants.ShootNoCleanup: "true"}
 
 	return a.createOrUpdateManagedResource(ctx, namespace, ShootResourcesName, "", renderer, service.ShootChartName, chartValues, injectedLabels)
 }
